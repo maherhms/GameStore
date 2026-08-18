@@ -1,8 +1,11 @@
+// GET ALL GAMES
 GET http://localhost:5123/games
 
+// GET GAME BY ID
 ###
-GET http://localhost:5123/games/4
+GET http://localhost:5123/games/2
 
+// POST GAME
 ###
 POST http://localhost:5123/games
 Content-Type: application/json
@@ -14,6 +17,7 @@ Content-Type: application/json
     "releaseDate" : "2023-10-20"
 }
 
+// UPDATE GAME BY ID
 ###
 PUT http://localhost:5123/games/1
 Content-Type: application/json
@@ -25,5 +29,6 @@ Content-Type: application/json
     "releaseDate": "1992-07-15"
 }
 
+// DELETE GAME BY ID
 ###
 DELETE http://localhost:5123/games/1
