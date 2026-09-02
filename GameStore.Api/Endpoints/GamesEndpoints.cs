@@ -56,7 +56,7 @@ public static class GamesEndpoints
             return Results.CreatedAtRoute(GetGameEndpointName, new {id = game.Id}, game);
         });
 
-        // PUT /games/id
+        // UPDATE /games/id
         group.MapPut("/{id}", (int id , UpdateGameDto updatedGame) =>
         {
             var index = games.FindIndex(game => game.Id == id);
