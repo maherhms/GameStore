@@ -32,7 +32,7 @@ public static class DataExtensions
     public static void AddGameStoreDb(this WebApplicationBuilder builder)
     {
         // SQLite connection string (file-based database).
-        var connString = "Data Source=GameStore.db";
+        var connString = builder.Configuration.GetConnectionString("GameStore");
 
         // Register EF Core + SQLite + seeding logic.
         builder.Services.AddSqlite<GameStoreContext>(

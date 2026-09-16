@@ -11,10 +11,10 @@ POST http://localhost:5123/games
 Content-Type: application/json
 
 {
-    "name" : "Super Mario Bros. Wonder",
-    "genre" : "Platformer",
-    "price" : 59.99,
-    "releaseDate" : "2023-10-20"
+    "name": "Super Mario Bros. Wonder",
+    "genreId": 3,
+    "price": 59.99,
+    "releaseDate": "2023-10-20"
 }
 
 // UPDATE GAME BY ID
@@ -24,11 +24,11 @@ Content-Type: application/json
 
 {
     "name": "Street Fighter 2 Turbo",
-    "genre": "Fighting",
+    "genreId": 3,
     "price": 9.99,
     "releaseDate": "1992-07-15"
 }
 
 // DELETE GAME BY ID
 ###
-DELETE http://localhost:5123/games/1
+DELETE http://localhost:5123/games/4

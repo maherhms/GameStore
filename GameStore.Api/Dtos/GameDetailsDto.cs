@@ -4,7 +4,7 @@ namespace GameStore.Api.Dtos;
 /// DTO returned to clients when retrieving game data.
 /// This represents the *public shape* of a Game resource.
 /// </summary>
-public record GameDto(
+public record GameDetailsDto(
 
     // Unique identifier for the game. Assigned by the system/database.
     int Id,
@@ -13,7 +13,7 @@ public record GameDto(
     string Name,
 
     // Genre of the game. Simple string categorization.
-    string Genre,
+    int GenreId,
 
     // Price of the game. Decimal is used for currency-safe precision.
     decimal Price,

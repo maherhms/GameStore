@@ -14,9 +14,9 @@ public record UpdateGameDto(
     string Name,
 
     // Updated genre. Required and limited to 20 characters.
-    [Required]
-    [StringLength(20)]
-    string Genre,
+    // The genreid between 1 and 50.
+    [Range(1,50)]
+    int GenreId,
 
     // Updated price. Must be between 1 and 100.
     [Range(1, 100)]
