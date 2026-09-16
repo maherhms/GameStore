@@ -14,6 +14,7 @@ var app = builder.Build();
 
 // Maps all /games endpoints (GET, POST, PUT, DELETE)
 app.MapGamesEndpoints();
+app.MapGenresEndpoints();
 
 // Applies EF Core migrations at startup (creates DB, updates schema)
 app.MigrateDb();
