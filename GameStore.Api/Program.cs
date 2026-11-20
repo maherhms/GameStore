@@ -1,5 +1,6 @@
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,15 @@ builder.Services.AddValidation();
 
 // Registers EF Core + SQLite + seeding logic (from DataExtensions)
 builder.AddGameStoreDb();
+
+builder.Services.AddAuthentication().AddJwtBearer(Options =>
+{
+    Options.Authority="http://localhost:8080/realms/gamestore";
+    Options.Audience="gamestore-api";
+    Options.RequireHttpsMetadata = false;
+});
+
+builder.Services.AddAuthorizationBuilder();
 
 // Builds the WebApplication (DI container, middleware pipeline, etc.)
 var app = builder.Build();

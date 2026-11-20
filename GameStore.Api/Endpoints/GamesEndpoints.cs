@@ -28,11 +28,13 @@ public static class GamesEndpoints
     /// </summary>
     public static void MapGamesEndpoints(this WebApplication app)
     {
-        // Group all endpoints under /games
+        /* Group all endpoints under /games
+        */
         var group = app.MapGroup("/games");
 
-        // GET /games
-        // Returns the full list of games.
+        /* GET /games
+        Returns the full list of games.
+        */
         group.MapGet("/", async (GameStoreContext dbContext) => 
         await dbContext.Games
             .Include(game => game.Genre)
@@ -46,8 +48,9 @@ public static class GamesEndpoints
             // any changes after retrievale
         )).AsNoTracking().ToListAsync());
 
-        // GET /games/{id}
-        // Returns a single game by ID.
+        /* GET /games/{id}
+        Returns a single game by ID.
+        */
         group.MapGet("/{id}", async (int id, GameStoreContext dbContext) =>
         {
             var game = await dbContext.Games.FindAsync(id);
@@ -63,8 +66,10 @@ public static class GamesEndpoints
             );
         }).WithName(GetGameEndpointName);
 
-        // POST /games
-        // Creates a new game from CreateGameDto.
+        /* POST /games
+        Creates a new game from CreateGameDto.
+        Protected with .RequireAuthorization();
+        */
         group.MapPost("/", async (CreateGameDto newGame ,GameStoreContext dbContext) =>
         {
             Game game = new()
@@ -90,10 +95,12 @@ public static class GamesEndpoints
             );
             // Returns 201 Created + Location header
             return Results.CreatedAtRoute( GetGameEndpointName, new { id = gameDto.Id },gameDto );
-        });
+        }).RequireAuthorization();
 
-        // PUT /games/{id}
-        // Updates an existing game.
+        /* PUT /games/{id}
+        Updates an existing game.
+        Protected with .RequireAuthorization();
+        */ 
         group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame , GameStoreContext dbContext) =>
         {
             var existingGame = await dbContext.Games.FindAsync(id);
@@ -111,14 +118,16 @@ public static class GamesEndpoints
             await dbContext.SaveChangesAsync();
 
             return Results.NoContent();
-        });
+        }).RequireAuthorization();
 
-        // DELETE /games/{id}
-        // Removes a game by ID.
+        /* DELETE /games/{id}
+        Removes a game by ID.
+        Protected with .RequireAuthorization();
+        */
         group.MapDelete("/{id}", async (int id, GameStoreContext dbContext) =>
         {
             await dbContext.Games.Where(game => game.Id == id).ExecuteDeleteAsync();
             return Results.NoContent();
-        });
+        }).RequireAuthorization();
     }
 }
